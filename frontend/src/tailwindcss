@@ -1,0 +1,37 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      keyframes: {
+        flip: {
+          '0%, 100%': { transform: 'rotateY(0deg)' },
+          '50%': { transform: 'rotateY(180deg)' },
+        },
+      },
+      animation: {
+        flip: 'flip 3s infinite linear',
+      },
+    },
+  },
+  plugins: [],
+};
+
+
+CREATE TABLE `kellp`.`task_header` (
+  `taskid` INT NOT NULL AUTO_INCREMENT,
+  `userid` VARCHAR(10) NOT NULL,
+  `task_desc` VARCHAR(225) NOT NULL,
+  `create_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` ENUM('Open', 'Working', 'Closed') NOT NULL DEFAULT 'Open',
+  `close_at` TIMESTAMP NULL,
+  `remarks` VARCHAR(225) NULL,
+  PRIMARY KEY (`taskid`),
+  CONSTRAINT fk_userid FOREIGN KEY (`userid`) REFERENCES `taskuser` (`userid`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE
+);

@@ -1,0 +1,168 @@
+.container {
+  padding: 40px;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: #0a0a0a;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  max-width: 320px;
+  margin-bottom: 10px;
+}
+
+.header h1 {
+  font-size: 36px;
+  margin: 10px 0;
+  color: #7CFF00;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #cfcfcf;
+}
+
+/* Index Section */
+.index {
+  max-width: 400px;
+  margin: auto;
+}
+
+.index h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #7CFF00;
+  padding-bottom: 8px;
+}
+
+.index ul {
+  list-style: none;
+  padding: 0;
+}
+
+.index li {
+  display: flex;
+  gap: 15px;
+  padding: 16px;
+  margin-bottom: 12px;
+  background: #151515;
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.index li:hover {
+  transform: translateX(25px);
+  box-shadow: 0 0 12px rgba(124, 255, 0, 0.3);
+}
+
+.index-no {
+  font-size: 22px;
+  font-weight: bold;
+  color: #7CFF00;
+  min-width: 30px;
+}
+
+.index-content h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.index-content p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #bdbdbd;
+}
+
+.arch-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+
+.arch-content {
+  position: relative;
+  width: 100vw;
+  height: 90vh;
+  background: #fff;
+  border-radius: 10px;
+  padding: 40px 20px 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+ outline: none;
+}
+
+
+.arch-image {
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.back-btn-top-left {
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #ec0f0f;
+}
+
+.back-btn-bottom-left {
+  left: 12px;
+  bottom: 10px;
+  text-align: right;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #e61212;
+}
+
+.back-btn-bottom-right {
+  right: 150px;
+  bottom: 10px;
+  text-align: right;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #e61212;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+.pdf-viewer {
+  flex: 1;
+  width: 100%;
+  border: none;
+}
