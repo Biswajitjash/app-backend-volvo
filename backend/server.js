@@ -250,7 +250,7 @@ app.get("/api/rfms2/proxy", async (req, res) => {
     // console.log("🟡 RFMS2 Proxy received path:", path);
 
     // Parse the path to extract all query parameters
-    const urlObj = new URL(`https://api.volvotrucks.com${path}`);
+    // const urlObj = new URL(`https://api.volvotrucks.com${path}`);
     
     // Log all extracted params
     // console.log("📥 Extracted params from path:", {
