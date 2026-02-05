@@ -1,7 +1,7 @@
 require('dotenv').config({ path: './myConfig.env' }); // Load variables from myConfig.env
 
 const express = require('express');
-const mysql = require('mysql2');
+// const mysql = require('mysql2');
 const nodemailer = require("nodemailer");
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -21,18 +21,19 @@ app.use(express.json());
 
 
 // Create MySQL connection
-const db = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
-});
+
+// const db = mysql.createConnection({
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD,
+//   database: process.env.DB_NAME
+// });
 
 
-db.connect(err => {
-  if (err) throw err;
+// db.connect(err => {
+//   if (err) throw err;
   // console.log('✅ MySQL Connected');
-});
+// });
 
 
 app.get("/api/volvo/scores", async (req, res) => {
@@ -302,160 +303,163 @@ app.get("/api/rfms2/proxy", async (req, res) => {
 
 
 // Health check endpoint
+
 app.get('/', (req, res) => {
   // res.send('🚀 API is running');
 });
 
 // GET all users
-app.get('/users', (req, res) => {
-  db.query('SELECT * FROM user', (err, results) => {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
-    res.json(results);
-  });
-});
+
+// app.get('/users', (req, res) => {
+//   db.query('SELECT * FROM user', (err, results) => {
+//     if (err) {
+//       return res.status(500).json({ error: err.message });
+//     }
+//     res.json(results);
+//   });
+// });
 
 // Global error handler (optional)
-app.use((err, req, res, next) => {
-  // console.error(err.stack);
-  res.status(500).json({ error: 'Something went wrong!' });
-});
+
+// app.use((err, req, res, next) => {
+//   // console.error(err.stack);
+//   res.status(500).json({ error: 'Something went wrong!' });
+// });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  db.query('SELECT * FROM user WHERE name = ? AND password = ?', [username, password], (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
-    if (results.length > 0) {
-      res.json({ success: true, user: results[0] });
-    } else {
-      res.status(401).json({ success: false, message: 'Invalid credentials' });
-    }
-  });
-});
+// app.post('/login', (req, res) => {
+//   const { username, password } = req.body;
+//   db.query('SELECT * FROM user WHERE name = ? AND password = ?', [username, password], (err, results) => {
+//     if (err) return res.status(500).json({ error: err.message });
+//     if (results.length > 0) {
+//       res.json({ success: true, user: results[0] });
+//     } else {
+//       res.status(401).json({ success: false, message: 'Invalid credentials' });
+//     }
+//   });
+// });
 
 ////////////////////////////CREATE NEW USER ID//////////////////////////////////////////////////
-  app.post('/create_user', (req, res) => {
-  // ❌ You can't use `alert` in server-side Node.js — it's a browser function
-  // console.log('Creating new user in server.js');
+//   app.post('/create_user', (req, res) => {
+//   // ❌ You can't use `alert` in server-side Node.js — it's a browser function
+//   // console.log('Creating new user in server.js');
 
-  const { userid, name, email, password, usrrole } = req.body;
+//   const { userid, name, email, password, usrrole } = req.body;
 
-  // ✅ Fix: 5 columns need 5 placeholders
-  const sql = 'INSERT INTO `user` (`userid`, `name`, `email`, `password`, `usrrole`) VALUES (?, ?, ?, ?, ?)';
+//   // ✅ Fix: 5 columns need 5 placeholders
+//   const sql = 'INSERT INTO `user` (`userid`, `name`, `email`, `password`, `usrrole`) VALUES (?, ?, ?, ?, ?)';
 
-  // ✅ Fix: Provide each value in the array separately, not as a single string
-  const values = [userid, name, email, password, usrrole];
+//   // ✅ Fix: Provide each value in the array separately, not as a single string
+//   const values = [userid, name, email, password, usrrole];
 
-  db.query(sql, values, (err, result) => {
-    if (err) {
-      // console.error('❌ Error inserting data:', err);
-      res.status(500).json({ success: false, error: err.message });
-      return;
-    }
+//   db.query(sql, values, (err, result) => {
+//     if (err) {
+//       // console.error('❌ Error inserting data:', err);
+//       res.status(500).json({ success: false, error: err.message });
+//       return;
+//     }
 
-    // console.log('✅ Data inserted successfully:');
-          res.status(200).json({ success: true, message: 'User created successfully!' });
-  });
-});
+//     // console.log('✅ Data inserted successfully:');
+//           res.status(200).json({ success: true, message: 'User created successfully!' });
+//   });
+// });
 
 ////////////////////////////CREATE NEW USER ID//////////////////////////////////////////////////////
-app.post("/send-email", async (req, res) => {
-// alert(`send to mail ${req.body}`);
+// app.post("/send-email", async (req, res) => {
+// // alert(`send to mail ${req.body}`);
 
-  const { to, subject, text } = req.body;
+//   const { to, subject, text } = req.body;
 
-  const transporter = nodemailer.createTransport({
-    host: "smtp.ampl.in",
-    port: 587,
-    secure: false,
-    auth: {
-      user: "sap.development@ampl.in", // full email
-      pass: process.env.MAIL_PASS,     // store password in .env
-    },
-  });
+//   const transporter = nodemailer.createTransport({
+//     host: "smtp.ampl.in",
+//     port: 587,
+//     secure: false,
+//     auth: {
+//       user: "sap.development@ampl.in", // full email
+//       pass: process.env.MAIL_PASS,     // store password in .env
+//     },
+//   });
 
-  try {
-    await transporter.sendMail({
-      from: '"SAP Dev Team" <sap.development@ampl.in>',
-      to,
-      subject,
-      text,
-    });
+//   try {
+//     await transporter.sendMail({
+//       from: '"SAP Dev Team" <sap.development@ampl.in>',
+//       to,
+//       subject,
+//       text,
+//     });
 
-    res.status(200).send("Mail sent successfully");
-  } catch (err) {
-    // console.error(err);
-    res.status(500).send("Failed to send mail");
-  }
-});
+//     res.status(200).send("Mail sent successfully");
+//   } catch (err) {
+//     // console.error(err);
+//     res.status(500).send("Failed to send mail");
+//   }
+// });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-app.post('/apiTesting', upload.single('file'), async (req, res) => {
-  try {
+// app.post('/apiTesting', upload.single('file'), async (req, res) => {
+//   try {
 
-    const {serverUrl, odataService, method, apiBody, isPost } = req.body;
-    const file = req.file;
+//     const {serverUrl, odataService, method, apiBody, isPost } = req.body;
+//     const file = req.file;
 
-    // const fullUrl = 'https://amwebdisp.ampl.in:44390/sap/opu/odata/sap/ZCWS_WMS_ODATA_SRV/ZDEEP_DATASet/' ;
+//     // const fullUrl = 'https://amwebdisp.ampl.in:44390/sap/opu/odata/sap/ZCWS_WMS_ODATA_SRV/ZDEEP_DATASet/' ;
    
-    const fullUrl = `${serverUrl}${odataService}${method} `;
+//     const fullUrl = `${serverUrl}${odataService}${method} `;
    
     
-    let headers;
+//     let headers;
 
-    if (serverUrl.includes('44390')) {
-      // DEV credentials
-      headers = {
-        'Accept': 'application/json',
-        'Authorization': 'Basic ' + Buffer.from(`${process.env.ODATA_DEV_USER}:${process.env.ODATA_DEV_PASS}`).toString('base64')
-      };
-    } else if (serverUrl.includes('44380')) {
-      // PRD credentials
-      headers = {
-        'Accept': 'application/json',
-        'Authorization': 'Basic ' + Buffer.from(`${process.env.ODATA_PRD_USER}:${process.env.ODATA_PRD_PASS}`).toString('base64')
-      };
-    } else {
-      return res.status(400).json({ error: 'Unknown server environment based on URL' });
-    }
+//     if (serverUrl.includes('44390')) {
+//       // DEV credentials
+//       headers = {
+//         'Accept': 'application/json',
+//         'Authorization': 'Basic ' + Buffer.from(`${process.env.ODATA_DEV_USER}:${process.env.ODATA_DEV_PASS}`).toString('base64')
+//       };
+//     } else if (serverUrl.includes('44380')) {
+//       // PRD credentials
+//       headers = {
+//         'Accept': 'application/json',
+//         'Authorization': 'Basic ' + Buffer.from(`${process.env.ODATA_PRD_USER}:${process.env.ODATA_PRD_PASS}`).toString('base64')
+//       };
+//     } else {
+//       return res.status(400).json({ error: 'Unknown server environment based on URL' });
+//     }
 
 
 
-    let csrfToken = '';
-    if (isPost === 'true') {
-      const tokenResp = await fetch(odataService, {
-        method: 'GET',
-        headers: { ...headers, 'X-CSRF-Token': 'Fetch' }
-      });
-      csrfToken = tokenResp.headers.get('x-csrf-token');
-      headers['X-CSRF-Token'] = csrfToken;
-    }
+//     let csrfToken = '';
+//     if (isPost === 'true') {
+//       const tokenResp = await fetch(odataService, {
+//         method: 'GET',
+//         headers: { ...headers, 'X-CSRF-Token': 'Fetch' }
+//       });
+//       csrfToken = tokenResp.headers.get('x-csrf-token');
+//       headers['X-CSRF-Token'] = csrfToken;
+//     }
 
-    let body = null;
-    if (file) {
-      // Handle file uploads here if needed
-    } else if (apiBody) {
-      headers['Content-Type'] = 'application/json';
-      body = apiBody;
-    }
-//////////////////////////////////////////////////////////////////////////////////
-    const resp = await fetch(fullUrl, {
-      method: isPost === 'true' ? 'POST' : 'GET',
-      headers,
-      body: isPost === 'true' ? body : null
-    });
-//////////////////////////////////////////////////////////////////////////////////
+//     let body = null;
+//     if (file) {
+//       // Handle file uploads here if needed
+//     } else if (apiBody) {
+//       headers['Content-Type'] = 'application/json';
+//       body = apiBody;
+//     }
+// //////////////////////////////////////////////////////////////////////////////////
+//     const resp = await fetch(fullUrl, {
+//       method: isPost === 'true' ? 'POST' : 'GET',
+//       headers,
+//       body: isPost === 'true' ? body : null
+//     });
+// //////////////////////////////////////////////////////////////////////////////////
 
-    const json = await resp.json();
-    res.status(resp.status).json(json);
+//     const json = await resp.json();
+//     res.status(resp.status).json(json);
 
-  } catch (err) {
-    // console.error('OData Proxy Error:', err);
-    res.status(500).json({ error: err.message });
-  }
-});
+//   } catch (err) {
+//     // console.error('OData Proxy Error:', err);
+//     res.status(500).json({ error: err.message });
+//   }
+// });
 
 app.listen(port, () => {
   // console.log(`🚀 Server is running on port ${port}`);

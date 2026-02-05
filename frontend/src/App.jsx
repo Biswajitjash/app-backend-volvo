@@ -29,9 +29,10 @@ const l_isLogin = localStorage.getItem('Login');
 const l_isUname = localStorage.getItem('Uname');
 {l_isUname  && (setIsUname(l_isUname)) };
 
-if (l_isLogin) {
-  speakFunction(`You Welcome, ${l_isUname}`);
-}
+// if (l_isLogin) {
+//   speakFunction(`You Welcome, ${l_isUname}`);
+// }
+
   }
 
 
@@ -60,14 +61,15 @@ if (l_isLogin) {
       <div className="bg-yellow-400  ">
         <Header 
         isLogin={isLogin}  
-        onLogin={handle_Login} 
+        // onLogin={handle_Login} 
         onLogout={handleLogout} 
         isUname={isUname} />     
 
     {showLogin && ( 
         <LoginModal 
           onClose={() => setShowLogin(false)} 
-          onSubmit={handle_Login} 
+          alertMessage={speakFunction("No data base installed")} 
+          // onSubmit={handle_Login} 
         />
       )}
 
