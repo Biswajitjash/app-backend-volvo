@@ -49,7 +49,7 @@ const VolvoTrackScore2 = () => {
   // const BASE_URL2 = "http://localhost:8800/api/rfms";
   // const BASE_URL3 = "http://localhost:8800/api/rfms2";
 
-const BASE_URL  = `${import.meta.env. }/api/volvo`;
+const BASE_URL  = `${import.meta.env.VITE_API_URL}/api/volvo`;
 const BASE_URL2 = `${import.meta.env.VITE_API_URL}/api/rfms`;
 const BASE_URL3 = `${import.meta.env.VITE_API_URL}/api/rfms2`;
 
