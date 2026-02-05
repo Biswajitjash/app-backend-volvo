@@ -48,7 +48,7 @@ const VolvoTrackScore2 = () => {
    // const BASE_URL  = "http://localhost:8800/api/volvo";
   // const BASE_URL2 = "http://localhost:8800/api/rfms";
   // const BASE_URL3 = "http://localhost:8800/api/rfms2";
-const prd_url = 'https://app-backend-volvo.onrender.comgit';
+// const prd_url = 'https://app-backend-volvo.onrender.comgit';
 
 const BASE_URL  = "https://app-backend-volvo.onrender.com/api/volvo";
 const BASE_URL2 = "https://app-backend-volvo.onrender.com/api/rfms";
